@@ -72,34 +72,29 @@ public class SubstringWithoutRepeating {
      */
     public static int solution2(String s) {
 
-        if( s == null || s.length() == 0){
-            return 0;
-        }
-
-        // 存储子串长度
-        Set<Character> characters = new HashSet<Character>();
-
-        int length = s.length();
-
         int maxLength = 0;
+
+        if (s == null || s.equals("")) {
+            return maxLength;
+        }
 
         int rightKey = -1;
 
-        for (int i = 0; i < length; i++) {
+        int stringLength = s.length();
 
-            // 左边窗口滑动
+
+        HashSet<Character> strings = new HashSet();
+
+        for (int i = 0; i < stringLength; i++) {
             if (i != 0) {
-                characters.remove(s.charAt(i - 1));
+                strings.remove(s.charAt(i-1));
             }
 
-            // 从当前开始组装字符串，碰到重复的退出循环
-            while (rightKey + 1 < length && !characters.contains(s.charAt(rightKey + 1))) {
-                characters.add(s.charAt(rightKey + 1));
+            while (rightKey + 1 < stringLength && !strings.contains(s.charAt(rightKey + 1))) {
+                strings.add(s.charAt(rightKey + 1));
                 rightKey++;
             }
-
-            maxLength = Math.max(maxLength,characters.size());
-
+            maxLength = Math.max(maxLength, strings.size());
         }
 
         return maxLength;
@@ -107,7 +102,7 @@ public class SubstringWithoutRepeating {
 
 
     public static void main(String[] args) {
-        System.out.println(solution2("213123213"));
+        System.out.println(solution2("pwwkew"));
     }
 
 }
